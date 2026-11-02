@@ -291,7 +291,7 @@ const F={
 function novo(k,id){const c=F[k],it=id?S[k].find(x=>x.id==id):null,m=document.createElement('div');m.className='modal';
  const dv={data:iso(new Date()),vence:iso(new Date()),prazo:iso(new Date()),parcelas:1,progresso:0},val=f=>it?(f[0]=='pago'?(pg(it)?'Paga':'A pagar'):it[f[0]]??''):dv[f[0]]??'';
  m.innerHTML=`<form><h3>${it?'Editar':'Nova'} ${c.t}</h3>${c.f.filter(f=>!(it&&f[0]=='parcelas')).map(f=>{const v=val(f);return `<label class="fi"><span>${f[1]}</span>${f[2]=='sel'?`<select name="${f[0]}">${f[3].map(o=>`<option ${o==v?'selected':''}>${o}</option>`).join('')}</select>`:`<input name="${f[0]}" type="${f[2]}" ${f[4]||''} value="${esc(v)}">`}</label>`}).join('')}<button class="btn">Salvar</button><button type="button" class="btn o" id="cl">Cancelar</button></form>`;
- document.body.append(m);m.onclick=e=>e.target==m&&m.remove();m.querySelector('#cl').onclick=()=>m.remove();
+ document.body.append(m);m.addEventListener('click',e=>{if(e.target==m)m.remove()});m.querySelector('#cl').onclick=()=>m.remove();
  m.querySelector('form').onsubmit=async e=>{e.preventDefault();const bt=e.target.querySelector('.btn');bt.disabled=true;
   try{const r=Object.fromEntries(new FormData(e.target)),n=Math.max(1,Math.min(36,+r.parcelas||1));delete r.parcelas;
    for(const x in r)if(typeof r[x]=='string')r[x]=r[x].trim();
