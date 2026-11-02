@@ -152,7 +152,7 @@ main{margin:0;padding:18px}.kpis,.g1,.g2,.fin{grid-template-columns:1fr}.tot{bor
 <div id="cfg" class="hide">Modo demonstração (dados no navegador). Preencha SUPABASE_URL e SUPABASE_KEY no código para usar o banco.</div>
 
 <script>
-const SUPABASE_URL='', SUPABASE_KEY='';           // <- cole aqui os dados do seu projeto Supabase
+const SUPABASE_URL='https://wclworefuscoyzkagtbc.supabase.co', SUPABASE_KEY='sb_publishable_d5IB5COoA7so-RQn8xenbQ_A3Y6oKg0';           // <- cole aqui os dados do seu projeto Supabase
 const sb=SUPABASE_URL?supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 const $=s=>document.querySelector(s),R=v=>(+v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const D=s=>s?s.split('-').reverse().join('/'):'',iso=d=>d.toLocaleDateString('sv'),sum=a=>a.reduce((s,x)=>s+ +x.valor,0);
