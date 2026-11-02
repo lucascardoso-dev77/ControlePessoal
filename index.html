@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Vida em Dia</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -99,9 +99,33 @@ header h1{font-size:34px;font-weight:800}
 .modal .btn{margin-top:18px}
 .empty{color:var(--mu);padding:18px 0;text-align:center;font-size:14px}
 #cfg{position:fixed;bottom:12px;right:12px;background:#b45309;color:#fff;font-size:12px;padding:8px 12px;border-radius:10px;z-index:5;max-width:300px}
-@media(max-width:1000px){#login{grid-template-columns:1fr;padding:28px}.hero,.feats{display:none}
-aside{position:static;width:100%;flex-direction:row;flex-wrap:wrap;padding:10px}aside .brand,.quote,.user{display:none}#app{flex-direction:column}nav{display:flex;flex-wrap:wrap}nav button{width:auto;padding:10px 12px}
-main{margin:0;padding:18px}.kpis,.g1,.g2,.fin{grid-template-columns:1fr}.tot{border:0;padding:0}.er{grid-template-columns:30px 1fr 90px}.er :nth-child(n+4){display:none}}
+.tb{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tb select,.tb .q{background:var(--in);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;font-size:14px;min-width:0}.tb .q{flex:1;min-width:120px;outline:0}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.sum div{background:var(--in);border:1px solid var(--bd);border-radius:12px;padding:12px}.sum small{display:block;color:var(--mu);font-size:12px}.sum b{font-size:18px}
+.xr{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--bd);font-size:14px;flex-wrap:wrap}#ls>.xr:first-child{border-top:0}
+.xr .n{flex:1;min-width:140px}.xr .n small{display:block;color:var(--mu);font-size:12px;margin-top:2px}.xr .i{font-size:22px;width:28px;text-align:center}
+.ac{display:flex;gap:6px;align-items:center;margin-left:auto}.add.sm{padding:7px 14px;font-size:13px}.gh{background:none;border:1px solid var(--bd);border-radius:10px;padding:7px 11px;font-size:13px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#16a34a;color:#fff;padding:12px 20px;border-radius:12px;z-index:20;font-size:14px;box-shadow:0 8px 24px #0006}.toast.er2{background:#dc2626}
+.cal em.p{background:#16a34a}.rl{width:64px;font-size:13px}.rv{width:110px;text-align:right;font-size:14px}
+:focus-visible{outline:2px solid var(--pr2);outline-offset:2px}body{overflow-x:hidden}
+.modal .fi{flex-direction:column;align-items:stretch;gap:0;height:auto;padding:8px 14px}.modal .fi span{font-size:12px;color:var(--mu)}.modal .fi input,.modal .fi select{height:30px;font-size:16px}
+.fi input{font-size:16px}
+@media(max-width:1000px){
+#login{grid-template-columns:1fr;padding:24px 18px;gap:24px}.hero,.feats{display:none}.logo{font-size:34px}#login h2{font-size:20px;margin-top:18px}.lc{padding:30px 22px}
+#app{display:block}
+aside{position:fixed;inset:auto 0 0 0;width:100%;height:auto;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom));border-right:0;border-top:1px solid var(--bd);z-index:8}
+aside .brand,aside .quote,aside .user{display:none}
+nav{display:flex;width:100%;gap:2px;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;min-width:70px;flex-direction:column;gap:3px;padding:8px 6px;margin:0;font-size:10px;text-align:center;justify-content:center}
+main{margin:0;padding:18px 14px calc(96px + env(safe-area-inset-bottom))}
+header h1{font-size:24px}header{gap:10px}.tools{gap:8px}#dt{display:none}
+.kpis{grid-template-columns:1fr 1fr;gap:10px}.k{padding:14px;flex-direction:column;gap:6px}.k .ic{font-size:26px}.k .v{font-size:24px}.k small{font-size:12px}.k .go{display:none}
+.g1,.g2{grid-template-columns:1fr}.fin{grid-template-columns:1fr;justify-items:center}.leg{width:100%}.tot{border:0;width:100%;border-top:1px solid var(--bd);padding:14px 0 0}
+.er{grid-template-columns:30px 1fr 90px}.er :nth-child(n+4){display:none}.gs{grid-template-columns:1fr}
+.card{padding:16px}.toast{bottom:96px}.sum b{font-size:15px}.xr .ac{width:100%;margin-left:0;justify-content:flex-end}
+.cal{gap:4px}.cal div{min-height:54px;padding:4px;font-size:11px}.cal em{font-size:0;width:8px;height:8px;border-radius:50%;padding:0;display:inline-block;margin:3px 2px 0}
+.modal{align-items:end}.modal form{width:100%;border-radius:20px 20px 0 0;max-height:92vh;overflow:auto;padding-bottom:calc(26px + env(safe-area-inset-bottom))}}
+@media(max-width:420px){.tb select{flex:1}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-logo" viewBox="0 0 24 24"><path d="M20 11.5V17a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h8.5" stroke-width="2.4"/><path d="M8.5 11.5l3.8 3.8L22 4.5" stroke-width="2.8"/></symbol>
@@ -158,6 +182,17 @@ const $=s=>document.querySelector(s),R=v=>(+v||0).toLocaleString('pt-BR',{style:
 const D=s=>s?s.split('-').reverse().join('/'):'',iso=d=>d.toLocaleDateString('sv'),sum=a=>a.reduce((s,x)=>s+ +x.valor,0);
 const diff=s=>Math.round((new Date(s+'T00:00:00')-new Date(iso(new Date())+'T00:00:00'))/864e5);
 const ym=o=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()+o);return iso(d).slice(0,7)};
+const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pg=e=>e.pago!==false;
+const mlabel=o=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()+o);const t=d.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});return t[0].toUpperCase()+t.slice(1)};
+const mo=()=>S.off==='all'?0:+S.off,inM=d=>S.off==='all'||(d||'').startsWith(ym(+S.off));
+const monthSel=all=>`<select aria-label="Mês" onchange="S.off=this.value==='all'?'all':+this.value;draw()">${all?`<option value="all" ${S.off==='all'?'selected':''}>Todos os meses</option>`:''}${[...Array(15)].map((_,i)=>3-i).map(o=>`<option value="${o}" ${(all?S.off!=='all':true)&&o===mo()?'selected':''}>${mlabel(o)}${o===0?' (atual)':''}</option>`).join('')}</select>`;
+const shift=d=>{S.off=Math.max(-11,Math.min(3,mo()+d));draw()};
+const due=n=>[...S.tasks.filter(t=>!t.feito&&diff(t.vence)<=n).map(t=>({t:t.titulo,d:diff(t.vence)})),...S.exp.filter(e=>!pg(e)&&diff(e.data)<=n).map(e=>({t:e.descricao,d:diff(e.data)}))];
+const addM=(x,i)=>{const d=new Date(x+'T00:00:00'),dy=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+i);d.setDate(Math.min(dy,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()));return iso(d)};
+function toast(t,e){const d=document.createElement('div');d.className='toast'+(e?' er2':'');d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),3200)}
+addEventListener('unhandledrejection',e=>e.preventDefault());
+addEventListener('keydown',e=>e.key=='Escape'&&document.querySelector('.modal')?.remove());
 const CAT={Moradia:['#22c55e','🏠'],Alimentação:['#a855f7','🍴'],Transporte:['#f59e0b','⛽'],Lazer:['#3b82f6','🎬'],Contas:['#f97316','⚡'],Saúde:['#16a34a','💪'],Outros:['#9ca3af','🧾']};
 const ICO=['🚗','💻','🏠','💪','🎁','📌'];
 const BC=['#ef4444','#2563eb','#16a34a','#7c3aed','#ea580c'];
@@ -165,14 +200,14 @@ let U={},S={exp:[],tasks:[],goals:[],off:0},V='inicio';
 
 /* ---------- dados (Supabase ou localStorage) ---------- */
 const L={g:t=>JSON.parse(localStorage.getItem('vd_'+t)||'[]'),s:(t,v)=>localStorage.setItem('vd_'+t,JSON.stringify(v))};
-const chk=x=>x.error&&alert('Erro: '+x.error.message);
+const chk=x=>{if(x.error){toast('Erro: '+x.error.message,1);throw x.error}};
 const db={
- async list(t){if(sb){const{data,error}=await sb.from(t).select('*').order('created_at',{ascending:false});if(error)alert('Erro ao carregar: '+error.message);return data||[]}return L.g(t)},
+ async list(t){if(sb){const{data,error}=await sb.from(t).select('*').order('created_at',{ascending:false});if(error)toast('Erro ao carregar: '+error.message,1);return data||[]}return L.g(t)},
  async add(t,r){if(sb){r.user_id=U.id;chk(await sb.from(t).insert(r))}else L.s(t,[{...r,id:crypto.randomUUID?.()||'id'+Date.now()+Math.random().toString(36).slice(2),created_at:new Date().toISOString()},...L.g(t)])},
  async upd(t,id,p){if(sb)chk(await sb.from(t).update(p).eq('id',id));else L.s(t,L.g(t).map(x=>x.id==id?{...x,...p}:x))},
  async del(t,id){if(sb)chk(await sb.from(t).delete().eq('id',id));else L.s(t,L.g(t).filter(x=>x.id!=id))}};
 const T={exp:'despesas',tasks:'pendencias',goals:'metas'};
-async function load(){for(const k in T)S[k]=await db.list(T[k]);draw()}
+let first=1;async function load(){if(first){$('#view').innerHTML='<p class="empty">Carregando…</p>';first=0}for(const k in T)S[k]=await db.list(T[k]);draw()}
 
 /* ---------- login ---------- */
 const msg=t=>$('#msg').textContent=t;
@@ -195,23 +230,23 @@ if(sb)sb.auth.getSession().then(({data})=>data.session&&enter(data.session.user)
 
 /* ---------- layout geral ---------- */
 const NAV=[['inicio','🏠','Início'],['despesas','💲','Despesas'],['pendencias','☑','Pendências'],['metas','✦','Metas'],['calendario','📅','Calendário'],['relatorios','📊','Relatórios'],['config','⚙','Configurações']];
-$('#nav').onclick=e=>{const b=e.target.closest('button');if(b){V=b.dataset.v;draw()}};
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(b)go(b.dataset.v)};
 $('#th').onclick=()=>{document.body.classList.toggle('light');$('#th').textContent=document.body.classList.contains('light')?'☀️':'🌙'};
-$('#bell').onclick=()=>{const a=S.tasks.filter(t=>!t.feito&&diff(t.vence)<=1);alert(a.length?a.map(t=>'• '+t.titulo+' ('+(diff(t.vence)<0?'atrasada':diff(t.vence)?'amanhã':'hoje')+')').join('\n'):'Nenhum lembrete para hoje.')};
-function go(v){V=v;draw()}
+$('#bell').onclick=()=>{const a=due(1);alert(a.length?a.map(x=>'• '+x.t+' ('+(x.d<0?'atrasada':x.d?'amanhã':'hoje')+')').join('\n'):'Nenhum lembrete para hoje.')};
+function go(v){V=v;FL.cat=FL.st=FL.q='';draw()}
 function draw(){
  $('#nav').innerHTML=NAV.map(n=>`<button data-v="${n[0]}" class="${V==n[0]?'on':''}"><span>${n[1]}</span>${n[2]}</button>`).join('');
  $('#hi').textContent=V=='inicio'?`Olá, ${U.name}! 🚀`:NAV.find(n=>n[0]==V)[2];
  $('#hs').textContent=V=='inicio'?'Aqui está um resumo da sua vida em dia.':'';
  $('#dt').textContent='📅  '+new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}).replace(/ de (\w)/,(m,c)=>' de '+c.toUpperCase());
- $('#bc').textContent=S.tasks.filter(t=>!t.feito&&diff(t.vence)<=1).length;
+ $('#bc').textContent=due(1).length;
  $('#view').innerHTML=({inicio,despesas:()=>lista('exp'),pendencias:()=>lista('tasks'),metas:()=>lista('goals'),calendario,relatorios,config})[V]()}
 
 /* ---------- início ---------- */
 function inicio(){
- const ex=S.exp.filter(e=>e.data.startsWith(ym(S.off))),tot=sum(ex),pt=sum(S.exp.filter(e=>e.data.startsWith(ym(S.off-1))));
+ const ex=S.exp.filter(e=>e.data.startsWith(ym(mo()))),tot=sum(ex),pt=sum(S.exp.filter(e=>e.data.startsWith(ym(mo()-1))));
  const renda=+U.renda||0,saldo=renda-tot,ps=renda-pt,pct=ps?(saldo-ps)/Math.abs(ps)*100:0,dv=pt?(tot-pt)/pt*100:0;
- const ativ=S.tasks.filter(t=>!t.feito).sort((a,b)=>a.vence>b.vence?1:-1),venc=ativ.filter(t=>diff(t.vence)<=7),
+ const ativ=S.tasks.filter(t=>!t.feito).sort((a,b)=>a.vence>b.vence?1:-1),venc=due(7),
   novas=ativ.filter(t=>(Date.now()-new Date(t.created_at))<6048e5).length,gA=S.goals.filter(g=>g.progresso<100);
  let by={};ex.forEach(e=>by[e.categoria]=(by[e.categoria]||0)+ +e.valor);
  let cs=Object.entries(by).sort((a,b)=>b[1]-a[1]);if(cs.length>5){const r=cs.slice(4).reduce((s,c)=>s+c[1],0);cs=[...cs.slice(0,4),['Outros',r]]}
@@ -225,46 +260,79 @@ function inicio(){
  <div class="k b" onclick="go('pendencias')"><div class="ic">🚗</div><div><small>Pendências Ativas</small><div class="v">${ativ.length}</div><small class="or2">↗ ${novas} novas <span style="color:var(--tx)">esta semana</span></small></div><div class="go">›</div></div>
  <div class="k c" onclick="go('calendario')"><div class="ic">📅</div><div><small>Próximos Vencimentos</small><div class="v">${venc.length}</div><small>nos próximos 7 dias</small></div><div class="go">›</div></div>
  <div class="k d" onclick="go('metas')"><div class="ic">🎯</div><div><small>Metas em Andamento</small><div class="v">${gA.length}</div><small>de ${S.goals.length} no total</small></div><div class="go">›</div></div></div>
- <div class="g1"><div class="card"><div class="ch"><h3>📊 Seu Controle Financeiro</h3><select onchange="S.off=+this.value;draw()"><option value="0">Este Mês</option><option value="-1" ${S.off==-1?'selected':''}>Mês Passado</option></select></div>
+ <div class="g1"><div class="card"><div class="ch"><h3>📊 Seu Controle Financeiro</h3>${monthSel(0)}</div>
   <div class="fin"><div class="donut" style="background:conic-gradient(${grad})"><div><b>${R(saldo).replace(',00','')}</b>Saldo</div></div>
   <div class="leg">${cs.map(([c,v])=>`<p><s style="background:${CAT[c]?.[0]||'#9ca3af'}"></s>${c}<span>${R(v)}</span><span class="sub">${(v/tot*100).toFixed(0)}%</span></p>`).join('')||'<span class="sub">Sem despesas neste mês</span>'}</div>
   <div class="tot">Total de Despesas<b>${R(tot)} <small class="dn" style="font-size:14px">${dv<=0?'▼':'▲'} ${dv.toFixed(0)}%</small></b>
   <svg viewBox="0 0 280 120"><polygon points="10,110 ${line} 268,110" fill="#6d4aff33"/><polyline points="${line}" fill="none" stroke="#8b6bff" stroke-width="2.5"/>${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="#8b6bff"/>`).join('')}
   ${['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].map((d,i)=>`<text x="${10+i*43}" y="119" font-size="9" fill="#9a98c0" text-anchor="middle">${d}</text>`).join('')}</svg></div></div></div>
   <div class="card"><div class="ch"><h3>☑ Pendências</h3><a href="#" onclick="go('pendencias');return false">Ver todas →</a></div>
-  ${ativ.slice(0,5).map(t=>`<div class="t"><span class="i">${t.icone||'📌'}</span><span class="n">${t.titulo}</span>${badge(diff(t.vence))}<button class="circ" onclick="tg('${t.id}')"></button></div>`).join('')||'<p class="empty">Nenhuma pendência ativa.</p>'}</div></div>
+  ${ativ.slice(0,5).map(t=>`<div class="t"><span class="i">${t.icone||'📌'}</span><span class="n">${esc(t.titulo)}</span>${badge(diff(t.vence))}<button class="circ" onclick="tg('${t.id}')"></button></div>`).join('')||'<p class="empty">Nenhuma pendência ativa.</p>'}</div></div>
  <div class="g2"><div>
   <div class="card" style="margin-bottom:18px"><div class="ch"><h3>🧾 Despesas Recentes</h3><a href="#" onclick="go('despesas');return false">Ver todas →</a></div>
-  ${S.exp.slice().sort((a,b)=>a.data<b.data?1:-1).slice(0,5).map(e=>`<div class="er"><span>${CAT[e.categoria]?.[1]||'🧾'}</span><span>${e.descricao}</span><b>${R(e.valor)}</b><span class="sub">${D(e.data)}</span><span class="bd" style="background:${CAT[e.categoria]?.[0]||'#9ca3af'}">${e.categoria}</span></div>`).join('')||'<p class="empty">Nenhuma despesa lançada.</p>'}</div></div>
+  ${S.exp.slice().sort((a,b)=>a.data<b.data?1:-1).slice(0,5).map(e=>`<div class="er"><span>${CAT[e.categoria]?.[1]||'🧾'}</span><span>${esc(e.descricao)}</span><b>${R(e.valor)}</b><span class="sub">${D(e.data)}</span><span class="bd" style="background:${CAT[e.categoria]?.[0]||'#9ca3af'}">${e.categoria}</span></div>`).join('')||'<p class="empty">Nenhuma despesa lançada.</p>'}</div></div>
   <div><div class="card"><div class="ch"><h3>🎯 Suas Metas</h3><a href="#" onclick="go('metas');return false">Ver todas →</a></div><div class="gs">
-  ${S.goals.slice(0,2).map(g=>`<div class="goal" onclick="prog('${g.id}')"><b>${g.titulo}</b><div class="pg"><div class="bar"><div style="width:${g.progresso}%;background:${g.progresso>=60?'#8b6bff':'#22c55e'}"></div></div><span>${g.progresso}%</span></div><span class="sub">Até: ${D(g.prazo)}</span></div>`).join('')||'<p class="empty">Crie sua primeira meta.</p>'}</div></div>
+  ${S.goals.slice(0,2).map(g=>`<div class="goal" onclick="prog('${g.id}')"><b>${esc(g.titulo)}</b><div class="pg"><div class="bar"><div style="width:${g.progresso}%;background:${g.progresso>=60?'#8b6bff':'#22c55e'}"></div></div><span>${g.progresso}%</span></div><span class="sub">Até: ${D(g.prazo)}</span></div>`).join('')||'<p class="empty">Crie sua primeira meta.</p>'}</div></div>
   <div class="ban"><div class="ic">🏆</div><div><b>Você está indo muito bem!</b>Continue organizando sua vida para alcançar ainda mais.</div></div></div></div>`}
 
 /* ---------- ações ---------- */
 async function tg(id){const t=S.tasks.find(x=>x.id==id);await db.upd('pendencias',id,{feito:!t.feito});load()}
 async function prog(id){const g=S.goals.find(x=>x.id==id),v=prompt('Progresso da meta (0 a 100):',g.progresso);if(v!==null&&!isNaN(v)){await db.upd('metas',id,{progresso:Math.min(100,Math.max(0,+v))});load()}}
 async function rm(k,id){if(confirm('Excluir este item?')){await db.del(T[k],id);load()}}
+const FL={cat:'',st:'',q:''},PG={exp:'despesas',tasks:'pendencias',goals:'metas'},KV=()=>({despesas:'exp',pendencias:'tasks',metas:'goals'}[V]);
 const F={
- exp:{t:'Nova despesa',f:[['descricao','Descrição','text'],['valor','Valor (R$)','number'],['data','Data','date'],['categoria','Categoria','sel',Object.keys(CAT)]]},
- tasks:{t:'Nova pendência',f:[['titulo','O que precisa fazer?','text'],['vence','Vencimento','date'],['icone','Ícone','sel',ICO]]},
- goals:{t:'Nova meta',f:[['titulo','Nome da meta','text'],['prazo','Prazo','date'],['progresso','Progresso (%)','number']]}};
-function novo(k){const c=F[k],m=document.createElement('div');m.className='modal';
- m.innerHTML=`<form><h3>${c.t}</h3>${c.f.map(f=>`<label class="fi">${f[2]=='sel'?`<select name="${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input name="${f[0]}" type="${f[2]}" step="0.01" placeholder="${f[1]}" title="${f[1]}" required ${f[2]=='date'?`value="${iso(new Date())}"`:''}>`}</label>`).join('')}<button class="btn">Salvar</button><button type="button" class="btn o" id="cl">Cancelar</button></form>`;
+ exp:{t:'despesa',f:[['descricao','Descrição','text','','required maxlength="80"'],['valor','Valor (R$)','number','','required min="0.01" step="0.01"'],['data','Vencimento / data','date','','required'],['categoria','Categoria','sel',Object.keys(CAT)],['pago','Situação','sel',['Paga','A pagar']],['parcelas','Repetir por quantos meses?','number','','min="1" max="36"']]},
+ tasks:{t:'pendência',f:[['titulo','O que precisa fazer?','text','','required maxlength="80"'],['vence','Vencimento','date','','required'],['icone','Ícone','sel',ICO]]},
+ goals:{t:'meta',f:[['titulo','Nome da meta','text','','required maxlength="80"'],['prazo','Prazo','date','','required'],['progresso','Progresso (%)','number','','required min="0" max="100"']]}};
+function novo(k,id){const c=F[k],it=id?S[k].find(x=>x.id==id):null,m=document.createElement('div');m.className='modal';
+ const dv={data:iso(new Date()),vence:iso(new Date()),prazo:iso(new Date()),parcelas:1,progresso:0},val=f=>it?(f[0]=='pago'?(pg(it)?'Paga':'A pagar'):it[f[0]]??''):dv[f[0]]??'';
+ m.innerHTML=`<form><h3>${it?'Editar':'Nova'} ${c.t}</h3>${c.f.filter(f=>!(it&&f[0]=='parcelas')).map(f=>{const v=val(f);return `<label class="fi"><span>${f[1]}</span>${f[2]=='sel'?`<select name="${f[0]}">${f[3].map(o=>`<option ${o==v?'selected':''}>${o}</option>`).join('')}</select>`:`<input name="${f[0]}" type="${f[2]}" ${f[4]||''} value="${esc(v)}">`}</label>`}).join('')}<button class="btn">Salvar</button><button type="button" class="btn o" id="cl">Cancelar</button></form>`;
  document.body.append(m);m.onclick=e=>e.target==m&&m.remove();m.querySelector('#cl').onclick=()=>m.remove();
- m.querySelector('form').onsubmit=async e=>{e.preventDefault();const r=Object.fromEntries(new FormData(e.target));if(k=='tasks')r.feito=false;if(k=='goals')r.progresso=+r.progresso||0;if(k=='exp')r.valor=+r.valor;await db.add(T[k],r);m.remove();load()}}
-
-/* ---------- páginas ---------- */
-function lista(k){const rows=S[k].slice(),line={
- exp:e=>`<div class="er" style="grid-template-columns:34px 1fr 110px 100px 100px 30px"><span>${CAT[e.categoria]?.[1]}</span><span>${e.descricao}</span><b>${R(e.valor)}</b><span class="sub">${D(e.data)}</span><span class="bd" style="background:${CAT[e.categoria]?.[0]}">${e.categoria}</span><button class="x" onclick="rm('exp','${e.id}')">✕</button></div>`,
- tasks:t=>`<div class="t"><span class="i">${t.icone||'📌'}</span><span class="n" style="${t.feito?'text-decoration:line-through;opacity:.5':''}">${t.titulo}</span><span class="sub">${D(t.vence)}</span><button class="circ ${t.feito?'f':''}" onclick="tg('${t.id}')"></button><button class="x" onclick="rm('tasks','${t.id}')">✕</button></div>`,
- goals:g=>`<div class="t"><span class="n">${g.titulo}<div class="pg"><div class="bar"><div style="width:${g.progresso}%;background:#8b6bff"></div></div>${g.progresso}%</div></span><span class="sub">Até ${D(g.prazo)}</span><button class="add" onclick="prog('${g.id}')">Atualizar</button><button class="x" onclick="rm('goals','${g.id}')">✕</button></div>`}[k];
- return `<div class="card"><div class="ch"><h3>${{exp:'Despesas',tasks:'Pendências',goals:'Metas'}[k]}</h3><button class="add" onclick="novo('${k}')">+ Adicionar</button></div>${rows.map(line).join('')||'<p class="empty">Nada por aqui ainda. Use “Adicionar” para começar.</p>'}</div>`}
-function calendario(){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),f=new Date(y,m,1).getDay(),dm=new Date(y,m+1,0).getDate();let h=['D','S','T','Q','Q','S','S'].map(d=>`<div class="h">${d}</div>`).join('')+'<div style="border:0"></div>'.repeat(f);
- for(let d=1;d<=dm;d++){const s=iso(new Date(y,m,d));h+=`<div><b>${d}</b>${S.tasks.filter(t=>t.vence==s).map(t=>`<em>${t.titulo}</em>`).join('')}${S.exp.filter(e=>e.data==s).map(e=>`<em class="e">${e.descricao}</em>`).join('')}</div>`}
- return `<div class="card"><div class="ch"><h3>${n.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}</h3><span class="sub">Roxo: pendências · Laranja: despesas</span></div><div class="cal">${h}</div></div>`}
-function relatorios(){const ms=[...Array(6)].map((_,i)=>{const o=i-5,v=sum(S.exp.filter(e=>e.data.startsWith(ym(o))));return[ym(o).slice(5)+'/'+ym(o).slice(2,4),v]}),mx=Math.max(...ms.map(x=>x[1]),1);
- return `<div class="card"><div class="ch"><h3>Despesas dos últimos 6 meses</h3></div>${ms.map(([l,v])=>`<div class="pg"><span style="width:60px">${l}</span><div class="bar"><div style="width:${v/mx*100}%;background:#8b6bff"></div></div><b style="width:110px;text-align:right">${R(v)}</b></div>`).join('')}</div>`}
-function config(){return `<div class="card" style="max-width:480px"><div class="ch"><h3>Configurações</h3></div><label class="fi">👤<input id="cn" value="${U.name}" placeholder="Seu nome"></label><label class="fi">💰<input id="cr" type="number" value="${U.renda}" placeholder="Renda mensal (R$)"></label><button class="btn" style="margin-top:18px" onclick="salvar()">Salvar alterações</button></div>`}
+ m.querySelector('form').onsubmit=async e=>{e.preventDefault();const bt=e.target.querySelector('.btn');bt.disabled=true;
+  try{const r=Object.fromEntries(new FormData(e.target)),n=Math.max(1,Math.min(36,+r.parcelas||1));delete r.parcelas;
+   for(const x in r)if(typeof r[x]=='string')r[x]=r[x].trim();
+   if(k=='exp'){r.valor=+r.valor;r.pago=r.pago=='Paga';r.data_pagamento=r.pago?(it?.data_pagamento||iso(new Date())):null}
+   if(k=='goals')r.progresso=Math.min(100,Math.max(0,+r.progresso||0));
+   if(k=='tasks'&&!it)r.feito=false;
+   if(it)await db.upd(PG[k],id,r);
+   else if(k=='exp'&&n>1)for(let i=0;i<n;i++)await db.add('despesas',{...r,descricao:`${r.descricao} (${i+1}/${n})`,data:addM(r.data,i),pago:i==0&&r.pago,data_pagamento:i==0&&r.pago?r.data_pagamento:null});
+   else await db.add(PG[k],r);
+   m.remove();toast(it?'Alterações salvas':'Adicionado com sucesso');load()}catch(x){bt.disabled=false}}}
+async function quit(id){const e=S.exp.find(x=>x.id==id),p=pg(e);await db.upd('despesas',id,{pago:!p,data_pagamento:p?null:iso(new Date())});toast(p?'Pagamento desfeito':'Conta quitada');load()}
+async function quitAll(){const a=vis('exp').filter(e=>!pg(e));if(!a.length||!confirm(`Quitar ${a.length} conta(s) no total de ${R(sum(a))}?`))return;for(const e of a)await db.upd('despesas',e.id,{pago:true,data_pagamento:iso(new Date())});toast('Contas quitadas');load()}
+function fl(key,v){FL[key]=v;$('#ls').innerHTML=ls(KV())}
+const opt=(a,v)=>a.map(o=>`<option value="${o[0]}" ${v==o[0]?'selected':''}>${o[1]}</option>`).join('');
+const nav2=()=>`<button class="pill" aria-label="Mês anterior" onclick="shift(-1)">‹</button>${monthSel(1)}<button class="pill" aria-label="Próximo mês" onclick="shift(1)">›</button>`;
+function bar(k){const sel=k=='exp'?`<select onchange="fl('cat',this.value)"><option value="">Todas as categorias</option>${Object.keys(CAT).map(c=>`<option ${FL.cat==c?'selected':''}>${c}</option>`).join('')}</select><select onchange="fl('st',this.value)">${opt([['','Todas'],['aberto','A pagar'],['pago','Pagas']],FL.st)}</select>`
+ :`<select onchange="fl('st',this.value)">${opt([['','Todas'],['aberto',k=='tasks'?'Ativas':'Em andamento'],['pago','Concluídas']],FL.st)}</select>`;
+ return `<div class="tb">${k=='goals'?'':nav2()}${sel}<input class="q" type="search" placeholder="Buscar…" value="${esc(FL.q)}" oninput="fl('q',this.value)"></div>`}
+function vis(k){const q=FL.q.toLowerCase(),st=x=>!FL.st||(FL.st=='pago')==x;
+ return S[k].filter(x=>k=='exp'?inM(x.data)&&(!FL.cat||x.categoria==FL.cat)&&st(pg(x))&&x.descricao.toLowerCase().includes(q):k=='tasks'?inM(x.vence)&&st(!!x.feito)&&x.titulo.toLowerCase().includes(q):st(x.progresso>=100)&&x.titulo.toLowerCase().includes(q))
+ .sort((a,b)=>k=='exp'?(a.data<b.data?1:-1):k=='tasks'?(a.vence>b.vence?1:-1):0)}
+function ls(k){const a=vis(k);let h='';
+ if(k=='exp'){const p=sum(a.filter(pg)),o=sum(a.filter(e=>!pg(e))),n=a.filter(e=>!pg(e)).length;h=`<div class="sum"><div><small>Total</small><b>${R(p+o)}</b></div><div><small>Pago</small><b class="up">${R(p)}</b></div><div><small>A pagar</small><b class="or2">${R(o)}</b></div></div>${n?`<button class="add" style="margin-bottom:12px" onclick="quitAll()">Quitar todas (${n})</button>`:''}`}
+ const st=e=>{const d=diff(e.data);return pg(e)?`<span class="bd" style="background:#16a34a">Paga${e.data_pagamento?' em '+D(e.data_pagamento).slice(0,5):''}</span>`:`<span class="bd" style="background:${d<0?'#ef4444':d==0?'#ea580c':'#6d4aff'}">${d<0?'Atrasada':d==0?'Vence hoje':'A pagar'}</span>`};
+ const ed=(k,id)=>`<button class="gh" title="Editar" aria-label="Editar" onclick="novo('${k}','${id}')">✎</button><button class="x" title="Excluir" aria-label="Excluir" onclick="rm('${k}','${id}')">✕</button>`;
+ const row={
+ exp:e=>`<div class="xr"><span class="i">${CAT[e.categoria]?.[1]||'🧾'}</span><div class="n"><b>${esc(e.descricao)}</b><small>${D(e.data)} · ${esc(e.categoria)}</small></div><b>${R(e.valor)}</b>${st(e)}<div class="ac">${pg(e)?`<button class="gh" onclick="quit('${e.id}')">Desfazer</button>`:`<button class="add sm" onclick="quit('${e.id}')">Quitar</button>`}${ed('exp',e.id)}</div></div>`,
+ tasks:t=>{const d=diff(t.vence);return `<div class="xr"><span class="i">${t.icone||'📌'}</span><div class="n"><b style="${t.feito?'text-decoration:line-through;opacity:.5':''}">${esc(t.titulo)}</b><small>${D(t.vence)}</small></div>${t.feito?'<span class="bd" style="background:#16a34a">Concluída</span>':`<span class="bd" style="background:${d<0?'#ef4444':d==0?'#ea580c':'#6d4aff'}">${d<0?'Atrasada':d==0?'Vence hoje':'Vence em '+d+' dias'}</span>`}<div class="ac"><button class="circ ${t.feito?'f':''}" title="${t.feito?'Reabrir':'Concluir'}" aria-label="Concluir" onclick="tg('${t.id}')"></button>${ed('tasks',t.id)}</div></div>`},
+ goals:g=>`<div class="xr"><div class="n"><b>${esc(g.titulo)}</b><div class="pg"><div class="bar"><div style="width:${g.progresso}%;background:#8b6bff"></div></div>${g.progresso}%</div><small>Até ${D(g.prazo)}</small></div><div class="ac"><button class="gh" onclick="prog('${g.id}')">Atualizar</button>${ed('goals',g.id)}</div></div>`}[k];
+ return h+(a.map(row).join('')||'<p class="empty">Nada encontrado. Ajuste os filtros ou use “Adicionar”.</p>')}
+function lista(k){return `<div class="card"><div class="ch"><h3>${{exp:'Despesas',tasks:'Pendências',goals:'Metas'}[k]}</h3><button class="add" onclick="novo('${k}')">+ Adicionar</button></div>${bar(k)}<div id="ls">${ls(k)}</div></div>`}
+function calendario(){const b=new Date();b.setDate(1);b.setMonth(b.getMonth()+mo());const y=b.getFullYear(),m=b.getMonth(),f=b.getDay(),dm=new Date(y,m+1,0).getDate();
+ let h=['D','S','T','Q','Q','S','S'].map(d=>`<div class="h">${d}</div>`).join('')+'<div style="border:0"></div>'.repeat(f);
+ for(let d=1;d<=dm;d++){const x=iso(new Date(y,m,d));h+=`<div><b>${d}</b>${S.tasks.filter(t=>t.vence==x).map(t=>`<em>${esc(t.titulo)}</em>`).join('')}${S.exp.filter(e=>e.data==x).map(e=>`<em class="${pg(e)?'p':'e'}">${esc(e.descricao)}</em>`).join('')}</div>`}
+ return `<div class="card"><div class="ch"><h3>Calendário</h3></div><div class="tb">${nav2().replace(monthSel(1),monthSel(0))}</div><p class="sub" style="font-size:12px;margin-bottom:10px">Roxo: pendências · Verde: contas pagas · Laranja: a pagar</p><div class="cal">${h}</div></div>`}
+function csv(){const rows=[['Descrição','Valor','Vencimento','Categoria','Situação'],...S.exp.filter(e=>e.data.startsWith(ym(mo()))).map(e=>[e.descricao,String(e.valor).replace('.',','),D(e.data),e.categoria,pg(e)?'Paga':'A pagar'])];
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(';')).join('\n')],{type:'text/csv'}));a.download='despesas-'+ym(mo())+'.csv';a.click()}
+function relatorios(){const o=mo(),ex=S.exp.filter(e=>e.data.startsWith(ym(o))),by={};ex.forEach(e=>by[e.categoria]=(by[e.categoria]||0)+ +e.valor);
+ const cs=Object.entries(by).sort((a,b)=>b[1]-a[1]),tot=sum(ex),ms=[...Array(6)].map((_,i)=>{const x=o+i-5;return[mlabel(x).slice(0,3)+'/'+ym(x).slice(2,4),sum(S.exp.filter(e=>e.data.startsWith(ym(x))))]}),mx=Math.max(...ms.map(x=>x[1]),1);
+ const row=(l,v,c,w)=>`<div class="pg"><span class="rl">${esc(l)}</span><div class="bar"><div style="width:${w}%;background:${c}"></div></div><b class="rv">${R(v)}</b></div>`;
+ return `<div class="card"><div class="ch"><h3>Relatórios</h3><button class="add" onclick="csv()">Exportar CSV</button></div><div class="tb">${nav2().replace(monthSel(1),monthSel(0))}</div>
+ <div class="sum"><div><small>Total</small><b>${R(tot)}</b></div><div><small>Pago</small><b class="up">${R(sum(ex.filter(pg)))}</b></div><div><small>A pagar</small><b class="or2">${R(sum(ex.filter(e=>!pg(e))))}</b></div></div>
+ <h4 class="sub" style="margin:6px 0 10px">Por categoria</h4>${cs.map(([c,v])=>row(c,v,CAT[c]?.[0]||'#9ca3af',v/tot*100)).join('')||'<p class="empty">Sem despesas neste mês.</p>'}
+ <h4 class="sub" style="margin:22px 0 10px">Últimos 6 meses</h4>${ms.map(([l,v])=>row(l,v,'#8b6bff',v/mx*100)).join('')}</div>`}
+function config(){return `<div class="card" style="max-width:480px"><div class="ch"><h3>Configurações</h3></div><label class="fi"><svg class="ico sm"><use href="#i-user"/></svg><input id="cn" value="${esc(U.name)}" placeholder="Seu nome"></label><label class="fi">R$<input id="cr" type="number" min="0" step="0.01" value="${U.renda}" placeholder="Renda mensal (R$)"></label><button class="btn" style="margin-top:18px" onclick="salvar()">Salvar alterações</button><button class="btn o" style="margin-top:10px" onclick="$('#out').click()">Sair da conta</button></div>`}
 async function salvar(){U.name=$('#cn').value;U.renda=+$('#cr').value;
  if(sb)await sb.auth.updateUser({data:{name:U.name,renda:U.renda}});else{const u=JSON.parse(localStorage.getItem('vd_user'));u.user_metadata={name:U.name,renda:U.renda};localStorage.setItem('vd_user',JSON.stringify(u))}
  $('#un').textContent=U.name;$('#av').textContent=U.name.slice(0,2).toUpperCase();go('inicio')}
