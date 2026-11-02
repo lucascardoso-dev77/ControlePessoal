@@ -2,7 +2,7 @@
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Vida em Dia</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js"></script>
 <style>
 :root{--bg:#0a0918;--card:#11102a;--bd:#2b2852;--pr:#6d4aff;--pr2:#8b6bff;--tx:#f3f2ff;--mu:#9a98c0;--in:#0d0c22}
 .light{--bg:#f3f2fb;--card:#fff;--bd:#dcd9f3;--tx:#1b1840;--mu:#6b6890;--in:#f7f6fd}
@@ -207,8 +207,8 @@ const L={g:t=>JSON.parse(localStorage.getItem('vd_'+t)||'[]'),s:(t,v)=>localStor
 const chk=x=>{if(x.error){toast('Erro: '+fmtErr(x.error.message),1);throw x.error}};
 const db={
  async list(t){if(sb){const{data,error}=await sb.from(t).select('*').order('created_at',{ascending:false});if(error)toast('Erro ao carregar: '+fmtErr(error.message),1);return data||[]}return L.g(t)},
- async add(t,r){if(sb){r.user_id=U.id;let x=await sb.from(t).insert(r);if(x.error&&t=='despesas'&&/pago|data_pagamento/.test(x.error.message)){nopago();delete r.pago;delete r.data_pagamento;x=await sb.from(t).insert(r)}chk(x)}else L.s(t,[{...r,id:crypto.randomUUID?.()||'id'+Date.now()+Math.random().toString(36).slice(2),created_at:new Date().toISOString()},...L.g(t)])},
- async upd(t,id,p){if(sb){let x=await sb.from(t).update(p).eq('id',id);if(x.error&&t=='despesas'&&/pago|data_pagamento/.test(x.error.message)){nopago();const{pago,data_pagamento,...rest}=p;if(!Object.keys(rest).length){toast('Para quitar contas, execute o SQL indicado no aviso no topo da página.',1);throw x.error}x=await sb.from(t).update(rest).eq('id',id)}chk(x)}else L.s(t,L.g(t).map(x=>x.id==id?{...x,...p}:x))},
+ async add(t,r){if(sb){const{data:ss}=await sb.auth.getSession();if(!ss.session){toast('Sessão expirada. Saia e entre novamente.',1);throw new Error('no session')}r.user_id=ss.session.user.id;let x=await sb.from(t).insert(r).select();if(x.error&&t=='despesas'&&/pago|data_pagamento/.test(x.error.message)){nopago();delete r.pago;delete r.data_pagamento;x=await sb.from(t).insert(r).select()}chk(x);if(!x.data||!x.data.length){toast('Não salvou: o banco não aceitou o registro (verifique o SQL/RLS).',1);throw new Error('insert vazio')}}else L.s(t,[{...r,id:crypto.randomUUID?.()||'id'+Date.now()+Math.random().toString(36).slice(2),created_at:new Date().toISOString()},...L.g(t)])},
+ async upd(t,id,p){if(sb){let x=await sb.from(t).update(p).eq('id',id).select();if(x.error&&t=='despesas'&&/pago|data_pagamento/.test(x.error.message)){nopago();const{pago,data_pagamento,...rest}=p;if(!Object.keys(rest).length){toast('Para quitar contas, execute o SQL indicado no aviso no topo da página.',1);throw x.error}x=await sb.from(t).update(rest).eq('id',id).select()}chk(x);if(!x.data||!x.data.length){toast('Não salvou: item não encontrado ou sem permissão.',1);throw new Error('update vazio')}}else L.s(t,L.g(t).map(x=>x.id==id?{...x,...p}:x))},
  async del(t,id){if(sb)chk(await sb.from(t).delete().eq('id',id));else L.s(t,L.g(t).filter(x=>x.id!=id))}};
 const T={exp:'despesas',tasks:'pendencias',goals:'metas'};
 let first=1;async function load(){if(first){$('#view').innerHTML='<p class="empty">Carregando…</p>';first=0}for(const k in T)S[k]=await db.list(T[k]);if(sb&&!probed){probed=true;const q=await sb.from('despesas').select('pago,data_pagamento').limit(1);if(q.error&&/pago|data_pagamento/.test(q.error.message))nopago()}draw()}
@@ -280,7 +280,7 @@ function inicio(){
   <div class="ban"><div class="ic">🏆</div><div><b>Você está indo muito bem!</b>Continue organizando sua vida para alcançar ainda mais.</div></div></div></div>`}
 
 /* ---------- ações ---------- */
-async function tg(id){const t=S.tasks.find(x=>x.id==id);await db.upd('pendencias',id,{feito:!t.feito});load()}
+async function tg(id){const t=S.tasks.find(x=>x.id==id);try{await db.upd('pendencias',id,{feito:!t.feito});load()}catch(e){}}
 async function prog(id){const g=S.goals.find(x=>x.id==id),v=prompt('Progresso da meta (0 a 100):',g.progresso);if(v!==null&&!isNaN(v)){await db.upd('metas',id,{progresso:Math.min(100,Math.max(0,+v))});load()}}
 async function rm(k,id){if(confirm('Excluir este item?')){await db.del(T[k],id);load()}}
 const FL={cat:'',st:'',q:''},PG={exp:'despesas',tasks:'pendencias',goals:'metas'},KV=()=>({despesas:'exp',pendencias:'tasks',metas:'goals'}[V]);
@@ -302,7 +302,7 @@ function novo(k,id){const c=F[k],it=id?S[k].find(x=>x.id==id):null,m=document.cr
    else if(k=='exp'&&n>1)for(let i=0;i<n;i++)await db.add('despesas',{...r,descricao:`${r.descricao} (${i+1}/${n})`,data:addM(r.data,i),pago:i==0&&r.pago,data_pagamento:i==0&&r.pago?r.data_pagamento:null});
    else await db.add(PG[k],r);
    m.remove();toast(it?'Alterações salvas':'Adicionado com sucesso');load()}catch(x){bt.disabled=false}}}
-async function quit(id){const e=S.exp.find(x=>x.id==id),p=pg(e);await db.upd('despesas',id,{pago:!p,data_pagamento:p?null:iso(new Date())});toast(p?'Pagamento desfeito':'Conta quitada');load()}
+async function quit(id){const e=S.exp.find(x=>x.id==id),p=pg(e);try{await db.upd('despesas',id,{pago:!p,data_pagamento:p?null:iso(new Date())});toast(p?'Pagamento desfeito':'Conta quitada');load()}catch(x){}}
 async function quitAll(){const a=vis('exp').filter(e=>!pg(e));if(!a.length||!confirm(`Quitar ${a.length} conta(s) no total de ${R(sum(a))}?`))return;for(const e of a)await db.upd('despesas',e.id,{pago:true,data_pagamento:iso(new Date())});toast('Contas quitadas');load()}
 function fl(key,v){FL[key]=v;$('#ls').innerHTML=ls(KV())}
 const opt=(a,v)=>a.map(o=>`<option value="${o[0]}" ${v==o[0]?'selected':''}>${o[1]}</option>`).join('');
