@@ -107,6 +107,7 @@ header h1{font-size:34px;font-weight:800}
 .ac{display:flex;gap:6px;align-items:center;margin-left:auto}.add.sm{padding:7px 14px;font-size:13px}.gh{background:none;border:1px solid var(--bd);border-radius:10px;padding:7px 11px;font-size:13px}
 .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#16a34a;color:#fff;padding:12px 20px;border-radius:12px;z-index:20;font-size:14px;box-shadow:0 8px 24px #0006}.toast.er2{background:#dc2626}
 .cal em.p{background:#16a34a}.rl{width:64px;font-size:13px}.rv{width:110px;text-align:right;font-size:14px}
+.bnr{background:#3a1d0b;border:1px solid #fb923c;color:#ffe9d6;border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:13px;line-height:1.5}.bnr code{display:block;margin-top:6px;font-size:12px;color:#fdba74;word-break:break-word}
 :focus-visible{outline:2px solid var(--pr2);outline-offset:2px}body{overflow-x:hidden}
 .modal .fi{flex-direction:column;align-items:stretch;gap:0;height:auto;padding:8px 14px}.modal .fi span{font-size:12px;color:var(--mu)}.modal .fi input,.modal .fi select{height:30px;font-size:16px}
 .fi input{font-size:16px}
@@ -169,7 +170,7 @@ header h1{font-size:24px}header{gap:10px}.tools{gap:8px}#dt{display:none}
   <div class="user"><div class="u"><div class="av" id="av">LC</div><div><b id="un" style="font-size:14px"></b><div class="sub" style="font-size:13px">Usuário</div></div></div><button class="out" id="out">⎋ Sair</button></div>
   <p class="quote">“Disciplina hoje, liberdade amanhã.”</p>
  </aside>
- <main><header><div><h1 id="hi"></h1><p class="sub" id="hs"></p></div>
+ <main><div id="bn" class="bnr hide"></div><header><div><h1 id="hi"></h1><p class="sub" id="hs"></p></div>
   <div class="tools"><div class="pill" id="dt"></div><button class="pill" id="bell">🔔<i id="bc">0</i></button><button class="pill" id="th">🌙</button></div></header>
   <div id="view"></div></main>
 </div>
@@ -182,6 +183,9 @@ const $=s=>document.querySelector(s),R=v=>(+v||0).toLocaleString('pt-BR',{style:
 const D=s=>s?s.split('-').reverse().join('/'):'',iso=d=>d.toLocaleDateString('sv'),sum=a=>a.reduce((s,x)=>s+ +x.valor,0);
 const diff=s=>Math.round((new Date(s+'T00:00:00')-new Date(iso(new Date())+'T00:00:00'))/864e5);
 const ym=o=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()+o);return iso(d).slice(0,7)};
+let NOPAGO=false,probed=false;
+function fmtErr(m){m=String(m||'');return /Failed to fetch|NetworkError|Load failed/i.test(m)?'Sem conexão com o Supabase. Abra o arquivo no seu computador ou numa hospedagem (a pré-visualização do Claude bloqueia conexões externas).':/does not exist|PGRST205|find the table/i.test(m)?'Tabela não encontrada: execute o supabase_schema.sql no SQL Editor do Supabase.':/row-level security|JWT|\b40[13]\b/i.test(m)?'Sessão expirada ou sem permissão. Saia e entre novamente.':m}
+function nopago(){if(NOPAGO)return;NOPAGO=true;const b=$('#bn');b.classList.remove('hide');b.innerHTML='<b>Falta atualizar o banco.</b> A tabela <code>despesas</code> não tem as colunas <code>pago</code> e <code>data_pagamento</code>. Suas despesas continuam sendo salvas, mas <b>Quitar</b> não será guardado. No Supabase, abra o SQL Editor e execute:<br><code>alter table despesas add column if not exists pago boolean not null default true;<br>alter table despesas add column if not exists data_pagamento date;</code>'}
 const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pg=e=>e.pago!==false;
 const mlabel=o=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()+o);const t=d.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});return t[0].toUpperCase()+t.slice(1)};
@@ -190,7 +194,7 @@ const monthSel=all=>`<select aria-label="Mês" onchange="S.off=this.value==='all
 const shift=d=>{S.off=Math.max(-11,Math.min(3,mo()+d));draw()};
 const due=n=>[...S.tasks.filter(t=>!t.feito&&diff(t.vence)<=n).map(t=>({t:t.titulo,d:diff(t.vence)})),...S.exp.filter(e=>!pg(e)&&diff(e.data)<=n).map(e=>({t:e.descricao,d:diff(e.data)}))];
 const addM=(x,i)=>{const d=new Date(x+'T00:00:00'),dy=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+i);d.setDate(Math.min(dy,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()));return iso(d)};
-function toast(t,e){const d=document.createElement('div');d.className='toast'+(e?' er2':'');d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),3200)}
+function toast(t,e){const d=document.createElement('div');d.className='toast'+(e?' er2':'');d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),e?8000:3200)}
 addEventListener('unhandledrejection',e=>e.preventDefault());
 addEventListener('keydown',e=>e.key=='Escape'&&document.querySelector('.modal')?.remove());
 const CAT={Moradia:['#22c55e','🏠'],Alimentação:['#a855f7','🍴'],Transporte:['#f59e0b','⛽'],Lazer:['#3b82f6','🎬'],Contas:['#f97316','⚡'],Saúde:['#16a34a','💪'],Outros:['#9ca3af','🧾']};
@@ -200,14 +204,14 @@ let U={},S={exp:[],tasks:[],goals:[],off:0},V='inicio';
 
 /* ---------- dados (Supabase ou localStorage) ---------- */
 const L={g:t=>JSON.parse(localStorage.getItem('vd_'+t)||'[]'),s:(t,v)=>localStorage.setItem('vd_'+t,JSON.stringify(v))};
-const chk=x=>{if(x.error){toast('Erro: '+x.error.message,1);throw x.error}};
+const chk=x=>{if(x.error){toast('Erro: '+fmtErr(x.error.message),1);throw x.error}};
 const db={
- async list(t){if(sb){const{data,error}=await sb.from(t).select('*').order('created_at',{ascending:false});if(error)toast('Erro ao carregar: '+error.message,1);return data||[]}return L.g(t)},
- async add(t,r){if(sb){r.user_id=U.id;chk(await sb.from(t).insert(r))}else L.s(t,[{...r,id:crypto.randomUUID?.()||'id'+Date.now()+Math.random().toString(36).slice(2),created_at:new Date().toISOString()},...L.g(t)])},
- async upd(t,id,p){if(sb)chk(await sb.from(t).update(p).eq('id',id));else L.s(t,L.g(t).map(x=>x.id==id?{...x,...p}:x))},
+ async list(t){if(sb){const{data,error}=await sb.from(t).select('*').order('created_at',{ascending:false});if(error)toast('Erro ao carregar: '+fmtErr(error.message),1);return data||[]}return L.g(t)},
+ async add(t,r){if(sb){r.user_id=U.id;let x=await sb.from(t).insert(r);if(x.error&&t=='despesas'&&/pago|data_pagamento/.test(x.error.message)){nopago();delete r.pago;delete r.data_pagamento;x=await sb.from(t).insert(r)}chk(x)}else L.s(t,[{...r,id:crypto.randomUUID?.()||'id'+Date.now()+Math.random().toString(36).slice(2),created_at:new Date().toISOString()},...L.g(t)])},
+ async upd(t,id,p){if(sb){let x=await sb.from(t).update(p).eq('id',id);if(x.error&&t=='despesas'&&/pago|data_pagamento/.test(x.error.message)){nopago();const{pago,data_pagamento,...rest}=p;if(!Object.keys(rest).length){toast('Para quitar contas, execute o SQL indicado no aviso no topo da página.',1);throw x.error}x=await sb.from(t).update(rest).eq('id',id)}chk(x)}else L.s(t,L.g(t).map(x=>x.id==id?{...x,...p}:x))},
  async del(t,id){if(sb)chk(await sb.from(t).delete().eq('id',id));else L.s(t,L.g(t).filter(x=>x.id!=id))}};
 const T={exp:'despesas',tasks:'pendencias',goals:'metas'};
-let first=1;async function load(){if(first){$('#view').innerHTML='<p class="empty">Carregando…</p>';first=0}for(const k in T)S[k]=await db.list(T[k]);draw()}
+let first=1;async function load(){if(first){$('#view').innerHTML='<p class="empty">Carregando…</p>';first=0}for(const k in T)S[k]=await db.list(T[k]);if(sb&&!probed){probed=true;const q=await sb.from('despesas').select('pago,data_pagamento').limit(1);if(q.error&&/pago|data_pagamento/.test(q.error.message))nopago()}draw()}
 
 /* ---------- login ---------- */
 const msg=t=>$('#msg').textContent=t;
@@ -218,9 +222,9 @@ $('#eye').onclick=()=>{const h=$('#pw').type=='password';$('#pw').type=h?'text':
 $('#lf').onsubmit=async e=>{e.preventDefault();const email=$('#em').value,password=$('#pw').value;
  if($('#rm').checked)localStorage.setItem('vd_em',email);
  if(!sb){const u=JSON.parse(localStorage.getItem('vd_user')||'null')||{id:'local',email,user_metadata:{name:email.split('@')[0],renda:0}};localStorage.setItem('vd_user',JSON.stringify(u));$('#rm').checked?localStorage.setItem('vd_auto','1'):localStorage.removeItem('vd_auto');return enter(u)}
- const{data,error}=await sb.auth.signInWithPassword({email,password});error?msg('E-mail ou senha incorretos.'):enter(data.user)};
+ const{data,error}=await sb.auth.signInWithPassword({email,password});error?msg(/Invalid login/i.test(error.message)?'E-mail ou senha incorretos.':/not confirmed/i.test(error.message)?'Confirme seu e-mail antes de entrar.':fmtErr(error.message)):enter(data.user)};
 $('#su').onclick=async e=>{e.preventDefault();if(!sb)return msg('Conecte o Supabase para criar contas.');
- const{error}=await sb.auth.signUp({email:$('#em').value,password:$('#pw').value,options:{data:{name:$('#em').value.split('@')[0]}}});msg(error?error.message:'Conta criada! Confirme o e-mail e entre.')};
+ const{error}=await sb.auth.signUp({email:$('#em').value,password:$('#pw').value,options:{data:{name:$('#em').value.split('@')[0]}}});msg(error?fmtErr(error.message):'Conta criada! Confirme o e-mail e entre.')};
 $('#fg').onclick=async e=>{e.preventDefault();if(!sb||!$('#em').value)return msg('Informe seu e-mail e conecte o Supabase.');await sb.auth.resetPasswordForEmail($('#em').value);msg('Enviamos o link de redefinição para o seu e-mail.')};
 $('#gg').onclick=()=>sb?sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}}):msg('Conecte o Supabase para usar o Google.');
 $('#out').onclick=async()=>{localStorage.removeItem('vd_auto');if(sb)await sb.auth.signOut();location.reload()};

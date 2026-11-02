@@ -6,6 +6,8 @@ create table if not exists despesas (
   valor numeric(12,2) not null,
   data date not null,
   categoria text not null default 'Outros',
+  pago boolean not null default true,
+  data_pagamento date,
   created_at timestamptz default now()
 );
 create table if not exists pendencias (
@@ -34,3 +36,7 @@ do $$ declare t text; begin
     execute format('create policy "dono" on %I for all using (auth.uid() = user_id) with check (auth.uid() = user_id)', t);
   end loop;
 end $$;
+
+-- Se a tabela despesas JÁ existia, rode também:
+alter table despesas add column if not exists pago boolean not null default true;
+alter table despesas add column if not exists data_pagamento date;
